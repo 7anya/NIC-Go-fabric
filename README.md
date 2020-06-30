@@ -12,3 +12,4 @@ requirements\n
 - run the folowing command- "./run.sh"  to deploy the blockchain
 - if you get permission denied error
   --run  "chmod +x ./run.sh", then run "./run.sh" to deploy the blockchain. might take a few minutes. once its successful, the website is fully functional.
+- admin username is NIC and password is blockchain
