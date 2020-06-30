@@ -2,7 +2,7 @@
 requirements\n
 - install go, version 1.14+
 - install gin
-- clone the fabric samples directory into your home directory
+- clone https://github.com/maruyari/fabric-samples directory into your home directory
 - open terminal in the directory of this folder and run : "go run main.go"
 - open localhost:8080 in browser
 - website should be stored in the above url
