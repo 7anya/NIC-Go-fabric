@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .form-popup {
+            display: none;
+            border: 3px solid #f1f1f1;
+        }
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+        .form-container input[type=text], .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+        .form-container .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom:10px;
+            opacity: 0.8;
+        }
+
+    </style>
+    <script>$.fn.formToJson = function () {
+        form = $(this);
+        let formArray = form.serializeArray(), jsonOutput = {};
+        return $.each(formArray, (function (i, element) {
+            let elemNameSplit = element.name.split("["), elemObjName = "jsonOutput";
+            $.each(elemNameSplit, (function (nameKey, value) {
+                nameKey != elemNameSplit.length - 1 ? (elemObjName = "]" == value.slice(value.length - 1) ? "]" === value ? elemObjName + "[" + Object.keys(eval(elemObjName)).length + "]" : elemObjName + "[" + value : elemObjName + "." + value, void 0 === eval(elemObjName) && eval(elemObjName + " = {};")) : "]" == value.slice(value.length - 1) ? "]" === value ? eval(elemObjName + "[" + Object.keys(eval(elemObjName)).length + "] = '" + element.value.replace("'", "\\'") + "';") : eval(elemObjName + "[" + value + " = '" + element.value.replace("'", "\\'") + "';") : eval(elemObjName + "." + value + " = '" + element.value.replace("'", "\\'") + "';")
+            }))
+        })), jsonOutput
+    };</script>
+</head>
+
+<body>
+
+<div class="container">
+    <h1 style="text-align: center">Add Marksheets</h1>
+    <p>Board : {{.board}}<br>School : {{.school}} <br>Exam : {{.exam}}<br>Year : {{ .year}}</p>
+    <div class="form-popup" id="divForm">
+        <form class="form-container" name="myform" id="myForm">
+            <h1>Marksheet data</h1>
+            <label for="name"><b>Name</b></label>
+            <input type="text" name="name" placeholder="Enter Student name" id="name" required>
+            <label for="name"><b>Roll Number</b></label>
+            <input type="text" name="rollno" placeholder="Enter Roll number" id="rollno" required>
+            <label for="board"><b>Board</b></label>
+            <input type="text" name="board" placeholder="Enter Board" id="board" required>
+            <label for="exam"><b>Exam</b></label>
+            <input type="text" name="exam" placeholder="Enter Exam" id="exam" required>
+            <label for="year"><b>Year</b></label>
+            <input type="text" name="year" placeholder="Enter Exam year" id="year" required>
+            <label for="marks"><b>Marks</b></label>
+            <input type="text" name="mark" placeholder="Enter Student marks" id="marks" required>
+            <button type="submit" class="btn">Add</button>
+        </form>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Student Roll Number</th>
+            <th>Add</th>
+            <th>Submitted</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody id="body">
+        {{range .data}}
+        <tr>
+            <td>{{ .Name}}</td>
+            <td class="rollno">{{ .RollNo}}</td>
+            <td><button class="button"  >Add</button></td>
+
+            <td class="sub" ></td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+    <script>$('.button').click(function(e){
+        e.preventDefault();
+        document.getElementById("divForm").style.display = "block";
+        document.getElementById("myForm").reset();
+        $(this).parent("td").parent("tr").css({"background-color":"lightgrey"});
+        $("#myForm").submit(function (event) {
+            let formData = JSON.stringify($(this).formToJson());
+            $.post("/add_record",formData,function () {
+                alert("success");
+                $(this).parent("td").parent("tr").find(".sub").text('\u2714');
+                $(this).style.display= "none";
+            });
+            event.preventDefault();
+        })})
+    </script>
+</div>
+
+</body>
+</html>

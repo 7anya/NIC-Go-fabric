@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Admin</title>  <!--name of website-to be changed-->
+    <!--<link rel="stylesheet" href="admin.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        #addmarksheet:hover, #modifymarksheet:hover, #viewmarksheet:hover{
+            text-decoration: underline;
+        }
+    </style>
+    <style type="text/css" media="screen">
+        <!--
+        @import url(/admin.css);
+        -->
+    </style>
+    <style>
+        .nav{
+            background-color:black;
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding-left: 30%;
+        }
+        .nav>li{
+            text-align: justify;
+            display: inline-block;
+            font-size: 20px;
+            padding: 20px;
+        }
+        a{
+            color: white;
+        }
+        .form-control {
+            width: 100%;
+
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+<h1 class="page-header" style="text-align: center;">ADMIN</h1>
+<div class="container-fluid" style="background-color: black">
+    <ul class="nav" >
+        <li class="active nav-item" id="addmarksheet"><a class="nav-link" onclick="form1()" style="cursor:context-menu; color: white;">Add Marksheets to blockchain</a></li>
+        <li class= "active nav-item" id="modifymarksheet"><a class="nav-link" onclick="form2()" style="cursor:context-menu; color: white;">Modify Marksheets</a></li>
+        <li class="active nav-item" id="viewmarksheet"><a class="nav-link" onclick="form3()" style="cursor:context-menu; color: white;"> View Marksheets</a></li>
+    </ul>
+</div>
+
+
+<div id="form_container"  style="display: none;" class="container-fluid">  <!--first form to add marksheets; action link will differ in all forms-->
+    <form id="form"  method="post" >  <!--add action link-->
+        <div class="form-group" >
+            <label for="board" >Name of Board</label>
+            <select class="form-control" id="board" name="BOARD" style="overflow: hidden;">
+                {{range $i,$v := .board}}
+                <option value="{{ $v}}">{{ $v}}</option>
+                {{ end}}
+            </select>
+        </div>
+        <div class="form-group" >
+            <label for="exam">Name of Exam</label>
+            <select class="form-control" id="exam" name="EXAM" style="overflow: hidden;">
+                {{range $i,$v := .exam}}
+                <option value="{{ $v}}">{{ $v}}</option>
+                {{ end}}
+            </select>
+        </div>
+        <div class="form-group" >
+            <label for="school">Name of School</label>
+            <select class="form-control" id="school" name="SCHOOL" style="overflow: hidden;">
+                {{range $i,$v := .school}}
+                <option value="{{ $v}}">{{ $v}}</option>
+                {{ end}}
+            </select>
+        </div>
+        <div class="form-group" >
+            <label for="exam_year">Year of Exam</label>
+            <select class="form-control" id="exam_year" name="YEAR" style="overflow: hidden;">
+                {{range $i,$v := .year}}
+                <option value="{{ $v}}">{{ $v}}</option>
+                {{ end}}
+            </select>
+        </div>
+        <input type="submit" value="Enter">
+    </form>
+
+    </div>
+</body>
+</html>
+<script>
+
+    function form()
+    {
+        if(document.querySelector('#form_container').style.display==="none"){
+            document.querySelector('#form_container').style.display="block";
+        }
+        else
+            document.querySelector('#form_container').style.display="none";
+        }
+
+    function form1(){
+        form();
+        document.querySelector('#form').action="/add"
+    }
+    function form2(){
+        form();
+        document.querySelector('#form').action="/modify"
+    }
+    function form3(){
+        form();
+        document.querySelector('#form').action="/view"
+    }
+
+</script>
+
+
+
+

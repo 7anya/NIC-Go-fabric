@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Store Marksheets in Blockchain</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+    </script>
+
+    <style>
+
+        /* The popup form - hidden by default */
+        .form-popup {
+            display: none;
+            border: 3px solid #f1f1f1;
+
+        }
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+            background-color: white;
+        }
+        /* Full-width input fields */
+        .form-container input[type=text], .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+        /* Set a style for the submit/login button */
+        .form-container .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom:10px;
+            opacity: 0.8;
+        }
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: red;
+        }
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>MARKSHEETS</h1>
+  <p style="font-style: italic;">View your marksheets here</p>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <button class="open-button" onclick="openForm()">Admin</button>
+</nav>
+<div class="form-popup" id="myForm">
+    <form  id="form" action="/password" method="post"  class="form-container">
+        <h1>Login</h1>
+
+        <label for="name"><b>Name</b></label>
+        <input type="text" placeholder="Enter Username" id="name" name="USERNAME" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="psw" name="PASSWORD" required>
+
+        <button type="submit" class="btn">Login</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+
+
+
+<div class="container" style="margin-top:30px">
+
+    <div class="block" style="height:200px; background:rgb(199, 205, 207) ; text-align: center;padding-top: 70px; font-size: 40px;">
+        <a href="student.html" style="color: black;" >VIEW MARKSHEETS</a>
+    </div>
+
+</div>
+
+</body>
+</html>

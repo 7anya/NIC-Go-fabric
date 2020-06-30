@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>View marksheets</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="text-align: center">View Marksheets</h1>
+    <p>Board : {{.board}}<br>School : {{.school}} <br>Exam : {{.exam}}<br>Year : {{ .year}}</p>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Student Roll Number</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody id="body">
+        {{range .data}}
+        <tr>
+            <td>{{ .Name}}</td>
+            <td class="rollno" >{{ .RollNo}}</td>
+
+            <td><button class="button" value="View" >View</button></td>
+
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+    <script>
+        $('.button').click(function(e) {
+            e.preventDefault();
+            window.open("/find/?rollno="+$(this).parent().prev().text());                                   //the parent element is the table data and prev element is the roll no td before that.
+            $.get("/find/?rollno="+$(this).parent().prev().text(), function(data, status) {                 //in case of change in table layout, can use parent("td").parent("tr").find(".rollno") to be ore specific
+                console.log("Data: " + data + "\nStatus: " + status);
+                alert(status);
+            })});
+
+    </script>
+</div>
+
+</body>
+</html>
